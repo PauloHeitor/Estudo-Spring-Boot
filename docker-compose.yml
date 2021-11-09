@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: springboot
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
+# sudo docker-compose up -d
+# para iniciar o banco
+# localhost:8081 adminer (interface grafica)
+
+# sudo docker-compose down
+# desligar banco
