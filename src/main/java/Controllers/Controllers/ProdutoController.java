@@ -2,6 +2,9 @@ package Controllers.Controllers;
 
 import model.entities.Produto;
 import model.entities.ProdutoRepositories;
+
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,22 +15,30 @@ import java.util.Optional;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoRepositories ProdutoRepositories;
+    private ProdutoService produtoService;
 
     @PostMapping
-    public @ResponseBody Produto NovoProduto(Produto produto) {
-        ProdutoRepositories.save(produto);
-
-        return produto;
+    public @ResponseBody ProdutoView NovoProduto(Produto produto) {
+        return produtoService.save(produto);
     }
 
-    @GetMapping
-    public Iterable<Produto> obterProdutos() {
-        return ProdutoRepositories.findAll();
-    }
+//    @GetMapping
+//    public Iterable<Produto> obterProdutos() {
+//        return ProdutoRepositories.findAll();
+//    }
 
-    /*@GetMapping(path = "/{id}")
-    public Optional<Produto> obterProdutoPorID(int id) {
-        return ProdutoRepositories.findAllById(id);
-    }*/
+    @GetMapping(path = "/{id}/{asdasdasdas}")
+    public ProdutoView obterProdutoPorID(@PathVariable int id, @PathVariable("asdasdasdas") String a) {
+        return produtoService.get(id);
+    }
+}
+
+class ProdutoView {
+    private int id;
+    private String nome;
+
+    public ProdutoView(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }

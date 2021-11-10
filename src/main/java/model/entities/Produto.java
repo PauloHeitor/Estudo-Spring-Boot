@@ -15,7 +15,7 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotBlank
     private String nome;
@@ -24,8 +24,10 @@ public class Produto {
     private double preco;
 
     @Min(0)
-    @Max(1)
+    @Max(50)
     private double desconto;
+
+    private String teste;
 
     public Produto(String nome, double preco) {
         this.nome = nome;
